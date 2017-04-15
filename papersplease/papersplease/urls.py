@@ -6,5 +6,5 @@ from django.views import static
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/(?P<path>.*)$', static.serve, { 'document_root': settings.MEDIA_ROOT }),
-    url(r'^$', include('papers.urls')),
+    url(r'', include('papers.urls')),
 )

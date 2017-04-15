@@ -1,5 +1,8 @@
 from django.conf.urls import patterns, url
 
+from .views import upload
+
+
 urlpatterns = patterns('',
-    # url(r'^$', views.home, name='home'),
+    url(r'^upload/(\w+)/$', upload, name='upload'),
 )
