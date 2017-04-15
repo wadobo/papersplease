@@ -8,6 +8,8 @@ from .models import Paper
 from .models import Author
 from .models import Attachment
 
+from .actions import paper_actions
+
 
 class AttachInline(admin.TabularInline):
     model = Attachment
@@ -31,6 +33,8 @@ class PaperAdmin(admin.ModelAdmin):
 
     filter_horizontal = ('authors', )
     inlines = [AttachInline, ]
+
+    actions = paper_actions
 
     def pauthors(self, obj):
         return ', '.join(i.get_full_name() for i in obj.authors.all())
