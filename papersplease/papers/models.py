@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from os import path
 from django.db import models
 from django.core.mail import send_mail
+import random
 
 
 PAPER_CHOICES = (
@@ -61,6 +62,16 @@ class Paper(models.Model):
     status = models.CharField(max_length=10, choices=PAPER_CHOICES, default='missing')
     conference = models.ForeignKey(Conference, related_name="papers")
     authors = models.ManyToManyField(Author, related_name="papers")
+
+    url = models.CharField(max_length=80, blank=True)
+
+    def gen_url(self):
+        chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+        return ''.join(random.choice(chars) for i in range(80))
+
+    def email(self, subject, message, from_email=None, **kwargs):
+        to = [i.email for i in self.authors.all()]
+        send_mail(subject, message, from_email, to, **kwargs)
 
     def __str__(self):
         return self.__unicode__()
