@@ -24,7 +24,8 @@ class ConferenceAdmin(admin.ModelAdmin):
 
 class PaperAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ('title', 'conference', 'status', 'pauthors')
+    list_display = ('title', 'conference', 'status', 'pauthors',
+                    'hasattach')
 
     list_filter = ('status', 'conference')
     search_fields = ('title', 'conference__name', 'conference__place',
@@ -39,6 +40,11 @@ class PaperAdmin(admin.ModelAdmin):
     def pauthors(self, obj):
         return ', '.join(i.get_full_name() for i in obj.authors.all())
     pauthors.short_description = 'Authors'
+
+    def hasattach(self, obj):
+        return obj.attachs.exists()
+    hasattach.short_description = 'Attach?'
+    hasattach.boolean = True
 
 
 class AuthorAdmin(admin.ModelAdmin):

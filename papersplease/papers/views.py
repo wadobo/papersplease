@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from .models import Paper
 
 
@@ -17,6 +18,11 @@ class Upload(TemplateView):
 
     def post(self, request, key):
         self.paper = get_object_or_404(Paper, url=key)
-        return super(Upload, self).post(request)
+        return redirect('thanks', key)
 
 upload = Upload.as_view()
+
+
+class Thanks(Upload):
+    template_name = 'thanks.html'
+thanks = Thanks.as_view()
