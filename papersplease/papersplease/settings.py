@@ -90,6 +90,27 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Email templates
+PAPERS_URL = 'http://localhost:8000'
+PAPERS_EMAIL_SUBJECT = 'Your papers, please'
+PAPERS_EMAIL_BODY = '''
+Hello,
+
+You're receiving this email because you are the author of the paper:
+{paper}
+
+for the conference:
+{conf}
+
+Please, send us the corresponding file using the following url:
+{url}
+
+Note: This path is a one-use-then-drop, so once you upload your paper, this
+url will be invalid.
+
+Regards.
+'''
+
 try:
     from local_settings import *
 except Exception as e:

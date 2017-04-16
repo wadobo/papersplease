@@ -3,33 +3,15 @@ from __future__ import unicode_literals
 import os
 import io
 import tarfile
+from functools import partial
 
 from django.http import HttpResponse
+from django.conf import settings
+
 from .models import PAPER_CHOICES
-from functools import partial
 
 
 paper_actions = []
-
-
-email_body = '''
-Hello,
-
-You're receiving this email because you are the author of the paper:
-{paper}
-
-for the conference:
-{conf}
-
-Please, send us the corresponding file using the following url:
-{url}
-
-Note: This path is a one-use-then-drop, so once you upload your paper, this
-url will be invalid.
-
-Regards.
-'''
-
 
 def send_email(modeladmin, request, queryset):
     for p in queryset:
@@ -37,9 +19,9 @@ def send_email(modeladmin, request, queryset):
         p.save()
 
 
-        # TODO: make this configurable
-        url = 'http://localhost:8000/upload/{0}'.format(p.url)
-        subject = 'Your papers, please'
+        email_body = settings.PAPERS_EMAIL_BODY
+        url = '{0}/upload/{1}'.format(settings.PAPERS_URL, p.url)
+        subject = settings.PAPERS_EMAIL_SUBJECT
         message = email_body.format(paper=p.title,
                                     conf=p.conference.name,
                                     url=url)
