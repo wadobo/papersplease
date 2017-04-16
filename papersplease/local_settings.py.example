@@ -23,3 +23,7 @@ DATABASES = {
 }
 
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# uploaded files will go here. By default this files will go to the code
+# directory in a folder called "media"
+#MEDIA_ROOT = '/var/www/private/files'
