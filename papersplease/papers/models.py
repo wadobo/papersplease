@@ -17,8 +17,8 @@ PAPER_CHOICES = (
 def paper_path(instance, filename):
     conf = instance.paper.conference.slug
     fname = instance.paper.slug
-    ext = path.splitext(filename)
-    return 'papers/{0}/{1}.{2}'.format(conf, fname, ext)
+    _, ext = path.splitext(filename)
+    return 'papers/{0}/{1}{2}'.format(conf, fname, ext)
 
 
 class Author(models.Model):

@@ -6,5 +6,5 @@ from .views import thanks
 
 urlpatterns = patterns('',
     url(r'^upload/(\w+)/$', upload, name='upload'),
-    url(r'^thanks/(\w+)/$', thanks, name='thanks'),
+    url(r'^thanks/$', thanks, name='thanks'),
 )
