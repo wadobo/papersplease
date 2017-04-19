@@ -19,6 +19,7 @@ class ConferenceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('name', 'place', 'date')
 
+    search_fields = ('name', 'place')
     date_hierarchy = 'date'
 
 
@@ -49,7 +50,7 @@ class PaperAdmin(admin.ModelAdmin):
 
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('email', 'first_name', 'last_name')
-
+    search_fields = ('email', 'first_name', 'last_name')
 
 class AttachmentAdmin(admin.ModelAdmin):
     list_display = ('attach', 'paper', 'uploaded')
