@@ -8,6 +8,12 @@ DEBUG = False
 TEMPLATE_DEBUG = False
 ALLOWED_HOSTS = ['*']
 
+DEFAULT_FROM_EMAIL = 'papers@wadobo.com'
+SERVER_EMAIL = 'papers@wadobo.com'
+ADMINS = (
+    ('Daniel Garcia', 'danigm@wadobo.com'),
+)
+
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
