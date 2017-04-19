@@ -7,6 +7,7 @@ from functools import partial
 
 from django.http import HttpResponse
 from django.conf import settings
+from django.contrib import messages
 
 from .models import PAPER_CHOICES
 
@@ -27,6 +28,8 @@ def send_email(modeladmin, request, queryset):
                                     url=url)
 
         p.email(subject, message)
+
+    messages.success(request, '{0} Emails sent.'.format(queryset.count()))
 
 
 def download(modeladmin, request, queryset):
