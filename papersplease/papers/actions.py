@@ -28,6 +28,7 @@ def send_email(modeladmin, request, queryset):
                                     url=url)
 
         p.email(subject, message)
+        # change paper status to "changes"
 
     messages.success(request, '{0} Emails sent.'.format(queryset.count()))
 
@@ -39,6 +40,9 @@ def download(modeladmin, request, queryset):
     files = []
     for p in queryset:
         files += [i.attach.path for i in p.attachs.all()]
+        # change paper status to "claimed"
+        # It would be good to be able to tell who claimed it
+        # but that would require more changes to the DB.
 
     output = io.BytesIO()
     tar = tarfile.open(fileobj=output, mode='w:gz')
