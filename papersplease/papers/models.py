@@ -9,10 +9,20 @@ import random
 
 PAPER_CHOICES = (
     ('missing', 'Paper Missing'),
-    ('changes', 'Changes Requested'),
     ('uploaded', 'Paper Uploaded'),
+    ('claimed', 'Being Reviewed'),
+    ('changes', 'Changes Requested'),
     ('ready', 'Camera Ready'),
 )
+
+#  state machine:
+#            action taken                new state
+#######################################################################################
+#  Initial   create paper:               'missing'  -> and email sent inviting upload
+#            upload paper:               'uploaded'
+#            reviewer downloads:         'claimed'
+#            reviewer asks for changes:  'changes' -> and email sent inviting upload
+#  Final     reviewer accepts:           'ready'
 
 def paper_path(instance, filename):
     conf = instance.paper.conference.slug
