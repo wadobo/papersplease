@@ -55,7 +55,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=200)),
                 ('status', models.CharField(default=b'missing', max_length=10, choices=[(b'missing', b'Paper Missing'), (b'changes', b'Changes Requested'), (b'uploaded', b'Paper Uploaded'), (b'ready', b'Camera Ready')])),
                 ('authors', models.ManyToManyField(related_name='papers', to='papers.Author')),
-                ('conference', models.ForeignKey(related_name='papers', to='papers.Conference')),
+                ('conference', models.ForeignKey(related_name='papers', to='papers.Conference', on_delete=models.PROTECT)),
             ],
             options={
             },
@@ -64,7 +64,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='attachment',
             name='paper',
-            field=models.ForeignKey(related_name='attachs', to='papers.Paper'),
+            field=models.ForeignKey(related_name='attachs', to='papers.Paper', on_delete=models.PROTECT),
             preserve_default=True,
         ),
     ]

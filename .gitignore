@@ -91,3 +91,6 @@ ENV/
 *.swp
 *.sqlite3
 papersplease/media/
+
+.idea
+.DS_Store

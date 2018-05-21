@@ -70,7 +70,7 @@ class Paper(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField()
     status = models.CharField(max_length=10, choices=PAPER_CHOICES, default='missing')
-    conference = models.ForeignKey(Conference, related_name="papers")
+    conference = models.ForeignKey(Conference, related_name="papers", on_delete=models.PROTECT)
     authors = models.ManyToManyField(Author, related_name="papers")
 
     url = models.CharField(max_length=80, blank=True)
@@ -91,7 +91,7 @@ class Paper(models.Model):
 
 
 class Attachment(models.Model):
-    paper = models.ForeignKey(Paper, related_name="attachs")
+    paper = models.ForeignKey(Paper, related_name="attachs", on_delete=models.PROTECT)
     attach = models.FileField(upload_to=paper_path)
     uploaded = models.DateTimeField(auto_now_add=True)
 
